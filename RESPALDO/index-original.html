@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketGo | Mercado digital</title>
+    <style>
+    :root {
+      --green: #0eaa61;
+      --green2: #087b46;
+      --navy: #10233d;
+      --text: #26364a;
+      --muted: #718096;
+      --bg: #f5f8fa;
+      --card: #fff;
+      --border: #e4ebef;
+      --danger: #c62828;
+      --warning: #c98200
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    .container {
+      width: min(1380px, 94%);
+      margin: auto
+    }
+
+    /* LOGIN */
+    .auth {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #edf9f2, #f4f7fa)
+    }
+
+    .auth-card {
+      width: min(450px, 94%);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 18px 50px #10233d16
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px
+    }
+
+    .brand-icon {
+      width: 58px;
+      height: 58px;
+      margin: auto;
+      border-radius: 17px;
+      background: #e7f8ef;
+      display: grid;
+      place-items: center;
+      font-size: 31px
+    }
+
+    .brand h1 {
+      margin-top: 9px;
+      font-size: 30px;
+      color: var(--navy)
+    }
+
+    .brand h1 span {
+      color: var(--green)
+    }
+
+    .brand p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 20px;
+      background: #f1f5f7;
+      border-radius: 10px;
+      padding: 4px
+    }
+
+    .tabs button {
+      border: 0;
+      background: transparent;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: var(--muted)
+    }
+
+    .tabs button.active {
+      background: #fff;
+      color: var(--green2);
+      box-shadow: 0 2px 8px #0000000d
+    }
+
+    .field {
+      margin-bottom: 13px
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #47576b
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      height: 43px;
+      border: 1px solid #d8e1e7;
+      border-radius: 8px;
+      padding: 0 11px;
+      outline: none;
+      background: #fff
+    }
+
+    .field textarea {
+      height: 90px;
+      padding-top: 10px;
+      resize: vertical
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--green)
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .primary {
+      border: 0;
+      background: var(--green);
+      color: #fff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-weight: 800
+    }
+
+    .secondary {
+      border: 1px solid #cbd7df;
+      background: #fff;
+      color: var(--navy);
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-weight: 700
+    }
+
+    .full {
+      width: 100%
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 12px
+    }
+
+    .error {
+      background: #fff0f0;
+      color: #a51d1d;
+      border: 1px solid #ffd2d2;
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-bottom: 12px
+    }
+
+    .success {
+      background: #edf9f2;
+      color: #087b46;
+      border: 1px solid #bfe8cf;
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-bottom: 12px
+    }
+
+    /* APP */
+    .app {
+      min-height: 100vh
+    }
+
+    .top {
+      height: 76px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 20
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 190px
+    }
+
+    .top-brand .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      font-size: 22px;
+      margin: 0
+    }
+
+    .top-brand strong {
+      font-size: 24px;
+      color: var(--navy)
+    }
+
+    .top-brand strong span {
+      color: var(--green)
+    }
+
+    .top-brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px
+    }
+
+    .top-search {
+      height: 42px;
+      display: flex;
+      flex: 1;
+      max-width: 600px;
+      border: 1px solid #d8e1e7;
+      border-radius: 9px;
+      overflow: hidden
+    }
+
+    .top-search input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 0 13px
+    }
+
+    .top-search button {
+      width: 50px;
+      border: 0;
+      background: var(--green);
+      color: #fff
+    }
+
+    .top-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .icon-btn {
+      border: 0;
+      background: #f4f7f8;
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      position: relative
+    }
+
+    .badge {
+      position: absolute;
+      right: -4px;
+      top: -4px;
+      background: var(--green);
+      color: #fff;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: 800
+    }
+
+    .user-mini {
+      font-size: 12px;
+      text-align: right
+    }
+
+    .user-mini strong {
+      display: block
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 235px 1fr;
+      min-height: calc(100vh - 76px)
+    }
+
+    .sidebar {
+      background: var(--navy);
+      color: #fff;
+      padding: 18px 13px;
+      position: sticky;
+      top: 76px;
+      height: calc(100vh - 76px);
+      display: flex;
+      flex-direction: column
+    }
+
+    .menu-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9eb0c5;
+      padding: 9px 11px
+    }
+
+    .side-menu {
+      display: grid;
+      gap: 3px
+    }
+
+    .side-btn {
+      border: 0;
+      background: transparent;
+      color: #dbe6ef;
+      text-align: left;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 13px
+    }
+
+    .side-btn:hover,
+    .side-btn.active {
+      background: #183552;
+      color: #fff
+    }
+
+    .logout {
+      margin-top: auto;
+      background: #162f4e
+    }
+
+    .content {
+      padding: 26px;
+      min-width: 0
+    }
+
+    .page-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px
+    }
+
+    .page-head h2 {
+      font-size: 25px;
+      color: var(--navy)
+    }
+
+    .page-head p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px
+    }
+
+    .module {
+      display: none
+    }
+
+    .module.active {
+      display: block
+    }
+
+    /* HOME */
+    .hero {
+      background: linear-gradient(100deg, #edf9f2, #f8fbf9);
+      border-radius: 18px;
+      min-height: 280px;
+      padding: 38px 42px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      z-index: 2
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      line-height: 1.08;
+      letter-spacing: -1.4px;
+      color: var(--navy)
+    }
+
+    .hero h1 span {
+      color: var(--green)
+    }
+
+    .hero p {
+      margin: 14px 0 20px;
+      color: #607084;
+      line-height: 1.6
+    }
+
+    .hero-art {
+      margin-left: auto;
+      font-size: 100px;
+      opacity: .85;
+      padding-right: 55px
+    }
+
+    .trust {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    .trust span {
+      color: var(--green);
+      font-size: 16px;
+      margin-right: 5px
+    }
+
+    .section {
+      margin-top: 26px
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 13px
+    }
+
+    .section-head h3 {
+      font-size: 21px
+    }
+
+    .link {
+      border: 0;
+      background: none;
+      color: var(--green2);
+      font-weight: 800;
+      font-size: 12px
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px
+    }
+
+    .category-card {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 13px;
+      min-height: 142px;
+      padding: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: .2s
+    }
+
+    .category-card:hover,
+    .product-card:hover,
+    .offer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px #10233d10
+    }
+
+    .cat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      background: #e9f8ef;
+      display: grid;
+      place-items: center;
+      font-size: 25px
+    }
+
+    .category-card h4 {
+      font-size: 14px
+    }
+
+    .category-card p {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px
+    }
+
+    .offer-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      overflow: hidden;
+      transition: .2s
+    }
+
+    .offer-img {
+      height: 125px;
+      background: linear-gradient(135deg, #edf9f2, #f7f9fb);
+      display: grid;
+      place-items: center;
+      font-size: 55px;
+      position: relative
+    }
+
+    .discount {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background: #fff0f0;
+      color: #c62828;
+      border-radius: 20px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800
+    }
+
+    .offer-body {
+      padding: 14px
+    }
+
+    .offer-body small {
+      color: var(--green2);
+      font-weight: 800
+    }
+
+    .offer-body h4 {
+      font-size: 14px;
+      margin: 4px 0
+    }
+
+    .old {
+      text-decoration: line-through;
+      color: #98a4b2;
+      font-size: 12px
+    }
+
+    .new {
+      font-weight: 900;
+      color: var(--green2);
+      font-size: 18px;
+      margin-left: 5px
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 7px;
+      margin-top: 10px
+    }
+
+    .card-actions button {
+      flex: 1;
+      padding: 8px;
+      border-radius: 7px;
+      border: 0;
+      font-size: 11px;
+      font-weight: 800
+    }
+
+    .add-btn {
+      background: var(--green);
+      color: #fff
+    }
+
+    .view-btn {
+      background: #edf8f1;
+      color: var(--green2)
+    }
+
+    /* PRODUCTS */
+    .filters {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr auto auto;
+      gap: 9px;
+      margin-bottom: 15px
+    }
+
+    .filters input,
+    .filters select {
+      height: 40px;
+      border: 1px solid #d8e1e7;
+      border-radius: 7px;
+      padding: 0 10px;
+      outline: 0
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      position: relative;
+      transition: .2s
+    }
+
+    .product-image {
+      height: 150px;
+      border-radius: 9px;
+      background: #f6f8f9;
+      display: grid;
+      place-items: center;
+      font-size: 65px;
+      margin-bottom: 10px
+    }
+
+    .fav {
+      position: absolute;
+      right: 10px;
+      top: 9px;
+      border: 0;
+      background: #fff;
+      border-radius: 50%;
+      font-size: 19px;
+      color: #738095
+    }
+
+    .product-card h4 {
+      font-size: 14px;
+      margin-bottom: 5px
+    }
+
+    .meta {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px
+    }
+
+    .price-row strong {
+      color: var(--green2);
+      font-size: 18px
+    }
+
+    .small-add {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 21px
+    }
+
+    /* CART / ORDERS / PROFILE */
+    .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+      margin-bottom: 15px
+    }
+
+    .cart-list {
+      display: grid;
+      gap: 10px
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 65px 1fr 100px 90px 90px 40px;
+      gap: 12px;
+      align-items: center;
+      border-bottom: 1px solid #eef2f4;
+      padding: 10px 0
+    }
+
+    .cart-img {
+      width: 65px;
+      height: 65px;
+      border-radius: 9px;
+      background: #f5f8f9;
+      display: grid;
+      place-items: center;
+      font-size: 31px
+    }
+
+    .qty {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .qty button {
+      width: 27px;
+      height: 27px;
+      border: 1px solid #d6e0e5;
+      background: #fff;
+      border-radius: 6px
+    }
+
+    .qty input {
+      width: 35px;
+      text-align: center;
+      border: 1px solid #d6e0e5;
+      height: 27px;
+      border-radius: 6px
+    }
+
+    .remove {
+      border: 0;
+      background: #fff0f0;
+      color: var(--danger);
+      border-radius: 6px;
+      width: 30px;
+      height: 30px
+    }
+
+    .summary {
+      max-width: 400px;
+      margin-left: auto
+    }
+
+    .summary div {
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 0
+    }
+
+    .summary .total {
+      font-size: 21px;
+      font-weight: 900;
+      border-top: 1px solid #ddd;
+      margin-top: 5px;
+      padding-top: 12px
+    }
+
+    .empty {
+      text-align: center;
+      padding: 55px 15px;
+      color: var(--muted)
+    }
+
+    .empty .emoji {
+      font-size: 52px;
+      margin-bottom: 8px
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+      margin-bottom: 15px
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px
+    }
+
+    .stat small {
+      color: var(--muted)
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      color: var(--navy);
+      margin-top: 4px
+    }
+
+    .order-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px
+    }
+
+    .order-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px
+    }
+
+    .status {
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      background: #edf9f2;
+      color: #087b46
+    }
+
+    .status.cancel {
+      background: #fff0f0;
+      color: #b42318
+    }
+
+    .order-info {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 13px;
+      font-size: 12px
+    }
+
+    .order-info span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 3px
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 15px
+    }
+
+    .profile-box {
+      text-align: center
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      margin: 5px auto 12px;
+      border-radius: 50%;
+      background: #e7f8ef;
+      color: var(--green2);
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      font-weight: 800
+    }
+
+    .profile-box h3 {
+      font-size: 19px
+    }
+
+    .profile-box p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .info {
+      background: #f7fafb;
+      border-radius: 9px;
+      padding: 12px
+    }
+
+    .info small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px
+    }
+
+    .info strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px
+    }
+
+    .table-wrap {
+      overflow: auto
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #edf1f3;
+      white-space: nowrap
+    }
+
+    .table th {
+      background: #f7fafb;
+      color: #526174
+    }
+
+    /* ADMIN */
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .export {
+      border: 1px solid #cbd7df;
+      background: #fff;
+      color: #24506a;
+      border-radius: 7px;
+      padding: 9px 12px;
+      font-weight: 800;
+      font-size: 11px
+    }
+
+    .danger {
+      background: #fff0f0 !important;
+      color: #b42318 !important
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #10233d66;
+      display: none;
+      place-items: center;
+      z-index: 100;
+      padding: 15px
+    }
+
+    .modal.show {
+      display: grid
+    }
+
+    .modal-box {
+      width: min(650px, 96%);
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px
+    }
+
+    .close {
+      border: 0;
+      background: #f1f4f5;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--navy);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 9px;
+      z-index: 200;
+      display: none;
+      font-size: 13px;
+      box-shadow: 0 8px 30px #0003
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1150px) {
+      .cards {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .layout {
+        grid-template-columns: 205px 1fr
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr 1fr
+      }
+
+      .hero-art {
+        padding-right: 15px
+      }
+
+      .stats,
+      .admin-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:850px) {
+      .top {
+        height: auto;
+        min-height: 70px;
+        flex-wrap: wrap;
+        padding: 10px 15px
+      }
+
+      .top-brand {
+        min-width: 160px
+      }
+
+      .top-search {
+        order: 3;
+        max-width: none;
+        flex-basis: 100%
+      }
+
+      .top-actions {
+        margin-left: auto
+      }
+
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: auto;
+        z-index: 15;
+        padding: 9px
+      }
+
+      .menu-title {
+        display: none
+      }
+
+      .side-menu {
+        grid-template-columns: repeat(4, 1fr)
+      }
+
+      .logout {
+        margin-top: 4px
+      }
+
+      .content {
+        padding: 17px
+      }
+
+      .hero {
+        padding: 28px
+      }
+
+      .hero h1 {
+        font-size: 35px
+      }
+
+      .hero-art {
+        font-size: 70px
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr
+      }
+
+      .cart-item {
+        grid-template-columns: 55px 1fr 80px 80px 35px
+      }
+
+      .cart-item .unit {
+        display: none
+      }
+    }
+
+    @media(max-width:600px) {
+      .container {
+        width: 92%
+      }
+
+      .top-brand {
+        min-width: 0
+      }
+
+      .top-brand strong {
+        font-size: 21px
+      }
+
+      .user-mini {
+        display: none
+      }
+
+      .side-menu {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .content {
+        padding: 12px
+      }
+
+      .page-head {
+        align-items: flex-start
+      }
+
+      .page-head h2 {
+        font-size: 21px
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 25px 20px
+      }
+
+      .hero h1 {
+        font-size: 30px
+      }
+
+      .hero-art {
+        display: none
+      }
+
+      .trust {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 7px
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px
+      }
+
+      .category-card {
+        min-height: 125px;
+        padding: 12px
+      }
+
+      .offer-grid,
+      .product-grid {
+        grid-template-columns: 1fr
+      }
+
+      .filters {
+        grid-template-columns: 1fr
+      }
+
+      .stats,
+      .admin-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .cart-item {
+        grid-template-columns: 55px 1fr 35px
+      }
+
+      .cart-item .qty,
+      .cart-item .unit {
+        display: none
+      }
+
+      .cart-item .subtotal {
+        grid-column: 2
+      }
+
+      .summary {
+        max-width: none
+      }
+
+      .order-info {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr
+      }
+
+      .auth-card {
+        padding: 22px
+      }
+    }
+
+    @media(max-width:380px) {
+      .cards {
+        grid-template-columns: 1fr
+      }
+
+      .stats,
+      .admin-grid {
+        grid-template-columns: 1fr
+      }
+
+      .side-menu {
+        grid-template-columns: 1fr
+      }
+
+      .top-actions .icon-btn {
+        width: 35px;
+        height: 35px
+      }
+    }
+
+    @media print {
+      body>*:not(#printArea) {
+        display: none !important
+      }
+
+      #printArea {
+        display: block !important;
+        padding: 30px;
+        font-family: Arial
+      }
+
+      .no-print {
+        display: none !important
+      }
+    }
+
+    #printArea {
+      display: none
+    }
+  </style>
+  </head>
+
+  <body>
+
+    <!-- LOGIN / REGISTRO -->
+    <div id="auth" class="auth">
+      <div class="auth-card">
+        <div class="brand">
+          <div class="brand-icon">🛒</div>
+          <h1>Market<span>Go</span></h1>
+
+        </div>
+        <div class="tabs"><button id="tabLogin" class="active"
+            onclick="showAuth('login')">Iniciar sesión</button><button
+            id="tabRegister"
+            onclick="showAuth('register')">Registrarme</button></div>
+        <div id="authMsg"></div>
+        <form id="loginForm" onsubmit="login(event)">
+          <div class="field"><label>Correo o identificación</label><input
+              id="loginId" required
+              placeholder="correo@ejemplo.com o DNI"></div>
+          <div class="field"><label>Contraseña</label><input id="loginPass"
+              type="password" required
+              placeholder="••••••••"></div>
+          <button class="primary full">Ingresar</button>
+
+          <p class="hint">Demo inicial: <b>admin@marketgo.pe</b> / <b>1234</b>.
+            </p>
+
+        </form>
+        <form id="registerForm" class="hidden" onsubmit="register(event)">
+          <div class="grid2">
+            <div class="field"><label>Identificación</label><input id="regDni"
+                required></div>
+            <div class="field"><label>Nombre</label><input id="regName"
+                required></div>
+          </div>
+          <div class="grid2">
+            <div class="field"><label>Apellido</label><input id="regLast"
+                required></div>
+            <div class="field"><label>Correo</label><input id="regEmail"
+                type="email" required></div>
+          </div>
+          <div class="field"><label>Contraseña</label><input id="regPass"
+              type="password" required minlength="4"></div>
+          <div class="field"><label>Rol</label><select id="regRole">
+              <option value="CLIENTE">Cliente</option>
+              <option value="EMPLEADO">Empleado</option>
+              <option value="ADMIN">Administrador</option>
+            </select></div>
+          <button class="primary full">Crear cuenta</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- APP -->
+    <div id="app" class="app hidden">
+      <header class="top">
+        <div class="top-brand">
+          <div class="brand-icon">🛒</div>
+          <div><strong>Market<span>Go</span></strong><small>
+
+            </small></div>
+        </div>
+        <div class="top-search"><input id="globalSearch"
+            placeholder="Buscar productos por nombre o código..."
+            onkeydown="if(event.key==='Enter')searchProducts()"><button
+            onclick="searchProducts()">⌕</button></div>
+        <div class="top-actions"><button class="icon-btn"
+            onclick="openModule('cart')">🛒<i class="badge"
+              id="cartCount">0</i></button>
+          <div class="user-mini"><strong id="userName">Usuario</strong><span
+              id="userRole">CLIENTE</span></div>
+        </div>
+      </header>
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="menu-title"></div>
+          <div id="sideMenu" class="side-menu"></div><button
+            class="side-btn logout" onclick="logout()">🚪 Cerrar
+            sesión</button>
+        </aside>
+        <main class="content">
+
+          <section id="mod-home" class="module active">
+            <div class="page-head">
+              <div>
+                <h2>¡Bienvenido, <span id="welcomeName">usuario</span>!</h2>
+
+              </div>
+            </div>
+            <div class="hero">
+              <div class="hero-copy">
+                <h1>Encuentra
+                  <span>todo</span> lo que necesitas en un solo
+                  lugar
+                </h1>
+                <button class="primary"
+                  onclick="openModule('products')">Explorar
+                  productos →</button>
+                <div class="trust">
+                  <div><span>✓</span>Compras
+                    seguras</div>
+                  <div><span>✓</span>Variedad de productos</div>
+                  <div><span>✓</span>Ofertas
+                    especiales</div>
+                </div>
+              </div>
+              <div class="hero-art">🛍️📱</div>
+            </div>
+            <div class="section">
+              <div class="section-head">
+                <h3>Categorías</h3><button class="link"
+                  onclick="openModule('categories')">Ver todas
+                  →</button>
+              </div>
+              <div id="homeCategories" class="cards"></div>
+            </div>
+            <div class="section">
+              <div class="section-head">
+                <h3>Ofertas
+                  especiales</h3><button class="link"
+                  onclick="openModule('offers')">Ver más →</button>
+              </div>
+              <div id="homeOffers" class="offer-grid"></div>
+            </div>
+          </section>
+
+          <section id="mod-categories" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Todas las categorías</h2>
+                <p>Selecciona
+                  una categoría para ver sus productos.</p>
+              </div><button class="export" onclick="exportCategories()">⬇
+                Excel</button>
+            </div>
+            <div id="allCategories" class="cards"></div>
+          </section>
+
+          <section id="mod-products" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Catálogo de productos</h2>
+                <p>Selecciona
+                  un producto y agrégalo a tu carrito.</p>
+              </div>
+            </div>
+            <div class="filters"><input id="productSearch"
+                placeholder="Nombre o código..."
+                oninput="renderProducts()"><select id="categoryFilter"
+                onchange="renderProducts()"></select><select
+                id="supplierFilter" onchange="renderProducts()"></select><button
+                class="primary"
+                onclick="renderProducts()">🔎 Buscar</button><button
+                class="secondary"
+                onclick="clearFilters()">Limpiar</button></div>
+            <div id="productGrid" class="product-grid"></div>
+          </section>
+
+          <section id="mod-offers" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Ofertas disponibles</h2>
+                <p>Productos
+                  seleccionados con descuentos especiales.</p>
+              </div>
+            </div>
+            <div id="allOffers" class="offer-grid"></div>
+          </section>
+
+          <section id="mod-cart" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Mi carrito</h2>
+                <p>Revisa tus productos
+                  antes de confirmar.</p>
+              </div>
+            </div>
+            <div id="cartPanel"></div>
+          </section>
+
+          <section id="mod-orders" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Historial de pedidos</h2>
+                <p>Revisa el
+                  detalle de tus compras.</p>
+              </div><button class="primary"
+                onclick="openModule('products')">Comprar
+                productos</button>
+            </div>
+            <div class="stats">
+              <div class="stat"><small>Total de pedidos</small><strong
+                  id="statTotalOrders">0</strong></div>
+              <div class="stat"><small>Pendientes</small><strong
+                  id="statPending">0</strong></div>
+              <div class="stat"><small>En
+                  proceso</small><strong id="statProcess">0</strong></div>
+              <div class="stat"><small>Entregados</small><strong
+                  id="statDelivered">0</strong></div>
+            </div>
+            <div class="panel">
+              <div class="toolbar"><input id="orderSearch"
+                  placeholder="Código o fecha..."
+                  oninput="renderOrders()"><select id="orderStatus"
+                  onchange="renderOrders()">
+                  <option value>Todos los
+                    estados</option>
+                  <option>Pendiente</option>
+                  <option>Enviado</option>
+                  <option>Entregado</option>
+                  <option>Cancelado</option>
+                </select></div>
+            </div>
+            <div id="ordersList"></div>
+          </section>
+
+          <section id="mod-profile" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Mi perfil</h2>
+                <p>Consulta la
+                  información de tu cuenta.</p>
+              </div>
+            </div>
+            <div class="profile-grid">
+              <div class="panel profile-box">
+                <div id="avatar" class="avatar">A</div>
+                <h3 id="profileName">Usuario</h3>
+                <p id="profileRole">Cliente
+                  MarketGo</p>
+                <p style="margin-top:8px">Cuenta activa</p>
+                <div class="form-actions"><button class="primary full"
+                    onclick="openModule('products')">Ir a
+                    productos</button></div>
+              </div>
+              <div class="panel">
+                <h3 style="margin-bottom:14px">Información personal</h3>
+                <div class="info-grid">
+                  <div class="info"><small>Identificación</small><strong
+                      id="profileDni">-</strong></div>
+                  <div class="info"><small>Nombre</small><strong
+                      id="profileFull">-</strong></div>
+                  <div class="info"><small>Correo electrónico</small><strong
+                      id="profileEmail">-</strong></div>
+                  <div class="info"><small>Tipo de usuario</small><strong
+                      id="profileRole2">-</strong></div>
+                  <div
+                    class="info"><small>Estado</small><strong>Activo</strong></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="mod-suppliers" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Proveedores</h2>
+                <p>Cada proveedor está
+                  relacionado con productos de su categoría.</p>
+              </div>
+              <div class="toolbar"><button class="primary"
+                  onclick="openSupplierModal()">+ Nuevo</button><button
+                  class="export" onclick="exportSuppliers()">⬇
+                  Excel</button></div>
+            </div>
+            <div class="panel">
+              <div class="toolbar"><input id="supplierSearch"
+                  placeholder="Buscar proveedor, RUC o categoría..."
+                  oninput="renderSuppliers()"></div>
+            </div>
+            <div class="panel table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>RUC</th>
+                    <th>Razón
+                      social</th>
+                    <th>Teléfono</th>
+                    <th>Categoría</th>
+                    <th>Productos</th>
+                    <th>Puntualidad</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="supplierTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="mod-reports" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Reportes</h2>
+                <p>Descarga los datos del
+                  sistema en Excel o imprime/guarda como PDF.</p>
+              </div>
+              <div class="toolbar"><button class="export"
+                  onclick="exportReport()">⬇ Excel</button><button
+                  class="primary"
+                  onclick="printReport()">⬇
+                  PDF</button></div>
+            </div>
+            <div class="admin-grid">
+              <div class="stat"><small>Productos</small><strong
+                  id="reportProducts">0</strong></div>
+              <div
+                class="stat"><small>Categorías</small><strong>5</strong></div>
+              <div class="stat"><small>Proveedores</small><strong
+                  id="reportSuppliers">0</strong></div>
+              <div class="stat"><small>Ofertas</small><strong
+                  id="reportOffers">0</strong></div>
+            </div>
+            <div class="panel">
+              <h3>Resumen de inventario</h3>
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Código</th>
+                      <th>Producto</th>
+                      <th>Categoría</th>
+                      <th>Proveedor</th>
+                      <th>Precio</th>
+                      <th>Stock</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reportTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="mod-admin-products" class="module">
+            <div class="page-head">
+              <div>
+                <h2>Administrar productos</h2>
+                <p>Nuevo,
+                  editar, eliminar y buscar.</p>
+              </div><button class="primary" onclick="openProductModal()">+ Nuevo
+                producto</button>
+            </div>
+            <div class="filters"><input id="adminProductSearch"
+                placeholder="Buscar..."
+                oninput="renderAdminProducts()"><select id="adminCatFilter"
+                onchange="renderAdminProducts()"></select><select
+                id="stockFilter" onchange="renderAdminProducts()">
+                <option value>Todo el stock</option>
+                <option value="low">Stock
+                  bajo</option>
+                <option value="out">Agotados</option>
+              </select><button class="export" onclick="exportProducts()">⬇
+                Excel</button></div>
+            <div class="panel table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Proveedor</th>
+                    <th>Precio
+                      venta</th>
+                    <th>Stock</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- MODALES -->
+    <div id="supplierModal" class="modal">
+      <div class="modal-box">
+        <div class="modal-head">
+          <h3 id="supplierModalTitle">Nuevo
+            proveedor</h3><button class="close"
+            onclick="closeModal('supplierModal')">×</button>
+        </div><input id="editSupplierIndex" type="hidden">
+        <div class="grid2">
+          <div class="field"><label>RUC</label><input id="sRuc"></div>
+          <div class="field"><label>Razón social / Nombre
+              comercial</label><input id="sName"></div>
+          <div class="field"><label>Teléfono /
+              Celular</label><input id="sPhone"></div>
+          <div class="field"><label>Correo</label><input id="sEmail"></div>
+          <div class="field"><label>Dirección</label><input id="sAddress"></div>
+          <div class="field"><label>Contacto /
+              Vendedor</label><input id="sContact"></div>
+          <div class="field"><label>Días de entrega</label><input id="sDays"
+              type="number" min="0"></div>
+          <div class="field"><label>Condición de
+              pago</label><select id="sPayment">
+              <option>Contado</option>
+              <option>Crédito 15
+                días</option>
+              <option>Crédito 30 días</option>
+            </select></div>
+          <div class="field"><label>Categoría que provee</label><select
+              id="sCategory"></select></div>
+          <div class="field"><label>Puntualidad</label><select id="sRating">
+              <option>Bueno</option>
+              <option>Regular</option>
+              <option>Malo</option>
+            </select></div>
+          <div class="field"><label>Estado</label><select id="sState">
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select></div>
+        </div>
+        <div class="form-actions"><button class="secondary"
+            onclick="closeModal('supplierModal')">Cancelar</button><button
+            class="primary" onclick="saveSupplier()">Guardar</button></div>
+      </div>
+    </div>
+
+    <div id="productModal" class="modal">
+      <div class="modal-box">
+        <div class="modal-head">
+          <h3 id="productModalTitle">Nuevo
+            producto</h3><button class="close"
+            onclick="closeModal('productModal')">×</button>
+        </div><input id="editProductIndex" type="hidden">
+        <div class="grid2">
+          <div class="field"><label>Código / SKU</label><input id="pCode"></div>
+          <div class="field"><label>Nombre</label><input id="pName"></div>
+          <div class="field"><label>Descripción</label><input id="pDesc"></div>
+          <div class="field"><label>Categoría</label><select
+              id="pCategory"></select></div>
+          <div class="field"><label>Proveedor</label><select
+              id="pSupplier"></select></div>
+          <div class="field"><label>Unidad</label><select id="pUnit">
+              <option>Unidad</option>
+              <option>Kg</option>
+              <option>Litro</option>
+              <option>Caja</option>
+            </select></div>
+          <div class="field"><label>Precio compra</label><input id="pBuy"
+              type="number" step="0.01"></div>
+          <div class="field"><label>Precio
+              venta</label><input id="pSell" type="number" step="0.01"></div>
+          <div class="field"><label>Stock
+              real</label><input id="pStock" type="number" min="0"></div>
+          <div class="field"><label>Stock mínimo</label><input id="pMin"
+              type="number" min="0"></div>
+        </div>
+        <div class="form-actions"><button class="secondary"
+            onclick="closeModal('productModal')">Cancelar</button><button
+            class="primary" onclick="saveProduct()">Guardar</button></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <div id="printArea"></div>
+
+    <script>
+    /* =========================================================
+       MARKETGO - TODO EN UN SOLO INDEX.HTML
+       Los datos se guardan en localStorage para que los botones
+       sigan funcionando incluso al recargar la página.
+       ========================================================= */
+    const CATS = [
+      { id: 'C001', name: 'Frutas y verduras', icon: '🥦'},
+      { id: 'C002', name: 'Abarrotes', icon: '🛒'},
+      { id: 'C003', name: 'Lácteos', icon: '🥛'},
+      { id: 'C004', name: 'Bebidas', icon: '🥤'},
+      { id: 'C005', name: 'Limpieza', icon: '🧹' }
+    ];
+    const SUPPLIERS = [
+      { ruc: '20100000001', name: 'Danper Trujillo S.A.C.', phone: '044-000001', email: 'ventas@danper.pe', address: 'Trujillo', contact: 'Ventas', days: 3, payment: 'Crédito 30 días', category: 'Frutas y verduras', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000002', name: 'Consorcio de Productores de Fruta (CPF)', phone: '01-000002', email: 'ventas@cpf.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Contado', category: 'Frutas y verduras', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000003', name: 'Tu Chacrita Frutas y Verduras Frescas E.I.R.L.', phone: '999000003', email: 'contacto@tuchacrita.pe', address: 'Lima', contact: 'Comercial', days: 1, payment: 'Contado', category: 'Frutas y verduras', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000004', name: 'Distribuidora Fruver Fresh E.I.R.L.', phone: '999000004', email: 'ventas@fruverfresh.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 15 días', category: 'Frutas y verduras', rating: 'Regular', state: 'Activo' },
+      { ruc: '20100000005', name: 'Berfrut S.A.C.', phone: '999000005', email: 'ventas@berfrut.pe', address: 'Ica', contact: 'Ventas', days: 3, payment: 'Crédito 30 días', category: 'Frutas y verduras', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000006', name: 'Tambos Perú S.A.C. (TAMPESAC)', phone: '999000006', email: 'ventas@tambos.pe', address: 'Lima', contact: 'Comercial', days: 2, payment: 'Crédito 30 días', category: 'Abarrotes', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000007', name: 'Proveedores de Abarrotes Santa Ana S.R.L.', phone: '999000007', email: 'ventas@santaana.pe', address: 'Lima', contact: 'Ventas', days: 3, payment: 'Crédito 15 días', category: 'Abarrotes', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000008', name: 'Comercializadora de Abarrotes San Sebastián S.A.C.', phone: '999000008', email: 'ventas@sansebastian.pe', address: 'Lima', contact: 'Ventas', days: 4, payment: 'Contado', category: 'Abarrotes', rating: 'Regular', state: 'Activo' },
+      { ruc: '20100000009', name: 'Avendaño Trading Company SAC (Avendacom)', phone: '999000009', email: 'ventas@avendacom.pe', address: 'Lima', contact: 'Comercial', days: 2, payment: 'Crédito 30 días', category: 'Abarrotes', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000010', name: 'Leche Gloria S.A. (Grupo Gloria)', phone: '01-000010', email: 'ventas@gloria.com.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 30 días', category: 'Lácteos', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000011', name: 'Laive S.A.', phone: '01-000011', email: 'ventas@laive.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 30 días', category: 'Lácteos', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000012', name: 'Nestlé Perú', phone: '01-000012', email: 'ventas@nestle.pe', address: 'Lima', contact: 'Ventas', days: 3, payment: 'Crédito 30 días', category: 'Lácteos', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000013', name: 'P&D Andina Alimentos', phone: '999000013', email: 'ventas@pdandina.pe', address: 'Lima', contact: 'Comercial', days: 3, payment: 'Crédito 15 días', category: 'Lácteos', rating: 'Regular', state: 'Activo' },
+      { ruc: '20100000014', name: 'Arca Continental Lindley S.A.', phone: '01-000014', email: 'ventas@lindley.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 30 días', category: 'Bebidas', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000015', name: 'Ajeper S.A. (Grupo AJE)', phone: '01-000015', email: 'ventas@aje.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 30 días', category: 'Bebidas', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000016', name: 'CBC Peruana S.A.C.', phone: '01-000016', email: 'ventas@cbc.pe', address: 'Lima', contact: 'Comercial', days: 3, payment: 'Crédito 15 días', category: 'Bebidas', rating: 'Regular', state: 'Activo' },
+      { ruc: '20100000017', name: 'Industrias San Miguel (ISM)', phone: '01-000017', email: 'ventas@ism.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Contado', category: 'Bebidas', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000018', name: 'Backus', phone: '01-000018', email: 'ventas@backus.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 30 días', category: 'Bebidas', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000019', name: 'Alicorp', phone: '01-000019', email: 'ventas@alicorp.com.pe', address: 'Lima', contact: 'Ventas', days: 3, payment: 'Crédito 30 días', category: 'Limpieza', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000020', name: 'Box Clean', phone: '999000020', email: 'ventas@boxclean.pe', address: 'Lima', contact: 'Ventas', days: 3, payment: 'Crédito 15 días', category: 'Limpieza', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000021', name: 'Compañía Kayser S.A.C. (+ASEO)', phone: '999000021', email: 'ventas@kayser.pe', address: 'Lima', contact: 'Comercial', days: 4, payment: 'Contado', category: 'Limpieza', rating: 'Regular', state: 'Activo' },
+      { ruc: '20100000022', name: 'Multilimp SAC (369 Calidad X 3)', phone: '999000022', email: 'ventas@multilimp.pe', address: 'Lima', contact: 'Ventas', days: 2, payment: 'Crédito 15 días', category: 'Limpieza', rating: 'Bueno', state: 'Activo' },
+      { ruc: '20100000023', name: 'A&D Químicos Diversos S.A.', phone: '999000023', email: 'ventas@adquimicos.pe', address: 'Lima', contact: 'Ventas', days: 3, payment: 'Crédito 30 días', category: 'Limpieza', rating: 'Bueno', state: 'Activo' }
+    ];
+    const NAMES = {
+      'Frutas y verduras': ['Manzana roja', 'Plátano de seda', 'Naranja', 'Tomate', 'Papa blanca', 'Zanahoria', 'Lechuga fresca'],
+      'Abarrotes': ['Arroz extra 5 kg', 'Aceite vegetal 1 L', 'Atún Florida', 'Mayonesa', 'Ketchup', 'Azúcar rubia 1 kg', 'Fideos 500 g'],
+      'Lácteos': ['Leche Gloria 1 L', 'Yogurt fresa', 'Queso fresco', 'Leche evaporada', 'Mantequilla', 'Yogurt natural', 'Queso mozzarella'],
+      'Bebidas': ['Agua San Luis 625 ml', 'Inca Kola 1.5 L', 'Coca-Cola 1.5 L', 'Gatorade', 'Jugo de naranja', 'Agua mineral 2.5 L', 'Bebida energizante'],
+      'Limpieza': ['Detergente 1 kg', 'Lavavajillas', 'Lejía 1 L', 'Limpiador multiuso', 'Papel higiénico pack', 'Desinfectante', 'Esponjas pack']
+    };
+    const ICONS = { "Frutas y verduras": ['🍎', '🍌', '🍊', '🍅', '🥔', '🥕', '🥬'], Abarrotes: ['🍚', '🫗', '🐟', '🥫', '🍅', '🧂', '🍝'], "Lácteos": ['🥛', '🍓', '🧀', '🥛', '🧈', '🥛', '🧀'], Bebidas: ['💧', '🥤', '🥤', '🧃', '🧃', '💧', '⚡'], Limpieza: ['🧴', '🧽', '🧪', '🧹', '🧻', '🧴', '🧽'] };
+    const SUP_BY_CAT = {}; SUPPLIERS.forEach(s => (SUP_BY_CAT[s.category] ??= []).push(s));
+    let products = []; let code = 1; Object.entries(NAMES).forEach(([cat, names]) => names.forEach((name, i) => { const s = SUP_BY_CAT[cat][i % SUP_BY_CAT[cat].length]; products.push({ code: 'P' + String(code++).padStart(3, '0'), name, description: 'Producto MarketGo', category: cat, supplier: s.name, supplierRuc: s.ruc, icon: ICONS[cat][i], unit: i % 3 === 0 ? 'Unidad' : i % 3 === 1 ? 'Kg' : 'Litro', buy: +(3 + i * 1.15 + (cat.length % 4)).toFixed(2), sell: +(5 + i * 1.9 + (cat.length % 5)).toFixed(2), stock: 25 + i * 7, min: 10, estado: 'Disponible' }); }));
+    const offers = [{ id: 'OF001', name: 'Bebidas refrescantes', product: 'Agua San Luis 625 ml', discount: '15%', old: 1.99, new: 1.69, icon: '💧', state: 'Activa' }, { id: 'OF002', name: 'Abarrotes del día', product: 'Arroz extra 5 kg', discount: '10%', old: 24.9, new: 22.41, icon: '🍚', state: 'Activa' }, { id: 'OF003', name: 'Lácteos familiares', product: 'Leche Gloria 1 L', discount: '12%', old: 4.5, new: 3.96, icon: '🥛', state: 'Activa' }, { id: 'OF004', name: 'Limpieza en casa', product: 'Detergente 1 kg', discount: '8%', old: 13.5, new: 12.42, icon: '🧴', state: 'Programada' }];
+    let users = JSON.parse(localStorage.getItem('marketgo_users') || 'null') || [{ dni: '00000000', name: 'Administrador', last: 'MarketGo', email: 'admin@marketgo.pe', pass: '1234', role: 'ADMIN' }, { dni: '11111111', name: 'Ana', last: 'Martines', email: 'ana@marketgo.pe', pass: '1234', role: 'CLIENTE' }];
+    let current = JSON.parse(localStorage.getItem('marketgo_current') || 'null'); let cart = JSON.parse(localStorage.getItem('marketgo_cart') || '[]'); let orders = JSON.parse(localStorage.getItem('marketgo_orders') || '[]'); let suppliers = JSON.parse(localStorage.getItem('marketgo_suppliers') || 'null') || SUPPLIERS.slice();
+    function save() { localStorage.setItem('marketgo_users', JSON.stringify(users)); localStorage.setItem('marketgo_current', JSON.stringify(current)); localStorage.setItem('marketgo_cart', JSON.stringify(cart)); localStorage.setItem('marketgo_orders', JSON.stringify(orders)); localStorage.setItem('marketgo_suppliers', JSON.stringify(suppliers)); }
+    function esc(s) { return String(s ?? '').replace(/[&<>'"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[m])); }
+    function money(n) { return 'S/ ' + Number(n).toFixed(2) }
+    function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(window.tt); window.tt = setTimeout(() => t.style.display = 'none', 2400) }
+    function showAuth(which) { document.getElementById('loginForm').classList.toggle('hidden', which !== 'login'); document.getElementById('registerForm').classList.toggle('hidden', which !== 'register'); document.getElementById('tabLogin').classList.toggle('active', which === 'login'); document.getElementById('tabRegister').classList.toggle('active', which === 'register'); document.getElementById('authMsg').innerHTML = '' }
+    function register(e) { e.preventDefault(); const u = { dni: regDni.value.trim(), name: regName.value.trim(), last: regLast.value.trim(), email: regEmail.value.trim().toLowerCase(), pass: regPass.value, role: regRole.value }; if (users.some(x => x.email === u.email || x.dni === u.dni)) { msgAuth('Ya existe una cuenta con ese correo o identificación.', 'error'); return } users.push(u); save(); msgAuth('Registro correcto. Ahora puedes iniciar sesión.', 'success'); showAuth('login'); loginId.value = u.email }
+    function msgAuth(msg, type) { document.getElementById('authMsg').innerHTML = `<div class="${type}">${msg}</div>` }
+    function login(e) { e.preventDefault(); const q = loginId.value.trim().toLowerCase(), p = loginPass.value; const u = users.find(x => (x.email.toLowerCase() === q || x.dni.toLowerCase() === q) && x.pass === p); if (!u) { msgAuth('Correo/identificación o contraseña incorrectos.', 'error'); return } current = u; save(); boot() }
+    function boot() { document.getElementById('auth').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); document.getElementById('userName').textContent = current.name + ' ' + current.last; document.getElementById('userRole').textContent = current.role; document.getElementById('welcomeName').textContent = current.name; document.getElementById('profileName').textContent = current.name + ' ' + current.last; document.getElementById('profileDni').textContent = current.dni; document.getElementById('profileFull').textContent = current.name + ' ' + current.last; document.getElementById('profileEmail').textContent = current.email; document.getElementById('profileRole').textContent = current.role === 'ADMIN' ? 'Administrador MarketGo' : current.role === 'EMPLEADO' ? 'Empleado MarketGo' : 'Cliente MarketGo'; document.getElementById('profileRole2').textContent = current.role; document.getElementById('avatar').textContent = (current.name[0] || 'U').toUpperCase(); buildMenu(); fillFilters(); renderHome(); renderProducts(); renderCart(); renderOrders(); renderSuppliers(); renderReports(); updateCartCount(); }
+    function logout() { current = null; save(); document.getElementById('app').classList.add('hidden'); document.getElementById('auth').classList.remove('hidden'); showAuth('login'); loginPass.value = ''; toast('Sesión cerrada') }
+    function menuItem(id, label, icon) { return `<button class="side-btn" data-module="${id}" onclick="openModule('${id}')">${icon} ${label}</button>` }
+    function buildMenu() { let html = menuItem('home', 'Inicio', '🏠') + menuItem('categories', 'Categorías', '📂') + menuItem('products', 'Productos', '📦') + menuItem('offers', 'Ofertas', '🏷️') + menuItem('cart', 'Carrito', '🛒') + menuItem('orders', 'Mis pedidos', '📋') + menuItem('profile', 'Mi perfil', '👤'); if (current.role === 'EMPLEADO' || current.role === 'ADMIN') html += menuItem('suppliers', 'Proveedores', '🏪') + menuItem('reports', 'Reportes', '📊'); if (current.role === 'ADMIN') html += menuItem('admin-products', 'Administrar productos', '⚙️'); document.getElementById('sideMenu').innerHTML = html }
+    const titles = { home: 'Inicio', categories: 'Categorías', products: 'Productos', offers: 'Ofertas', cart: 'Carrito', orders: 'Mis pedidos', profile: 'Mi perfil', suppliers: 'Proveedores', reports: 'Reportes', 'admin-products': 'Administrar productos' };
+    function openModule(id) { document.querySelectorAll('.module').forEach(x => x.classList.remove('active')); const m = document.getElementById('mod-' + id); if (m) m.classList.add('active'); document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('active', b.dataset.module === id)); window.scrollTo({ top: 0, behavior: 'smooth' }); if (id === 'cart') renderCart(); if (id === 'orders') renderOrders(); if (id === 'suppliers') renderSuppliers(); if (id === 'reports') renderReports(); if (id === 'admin-products') renderAdminProducts(); if (id === 'products') renderProducts() }
+    function renderHome() { document.getElementById('homeCategories').innerHTML = CATS.map(c => `<button class="category-card" onclick="filterByCategory('${esc(c.name)}')"><div class="cat-icon">${c.icon}</div><h4>${esc(c.name)}</h4><p>${esc(c.desc)}</p><b style="font-size:11px;color:var(--green2)">Ver productos →</b></button>`).join(''); document.getElementById('homeOffers').innerHTML = offers.slice(0, 3).map(offerCard).join(''); document.getElementById('allCategories').innerHTML = CATS.map(c => `<button class="category-card" onclick="filterByCategory('${esc(c.name)}')"><div class="cat-icon">${c.icon}</div><h4>${esc(c.name)}</h4><p>${products.filter(p => p.category === c.name).length} productos</p><b style="font-size:11px;color:var(--green2)">Ver productos →</b></button>`).join(''); document.getElementById('allOffers').innerHTML = offers.map(offerCard).join('') }
+    function offerCard(o) { return `<article class="offer-card"><div class="offer-img"><span class="discount">-${esc(o.discount)}</span>${o.icon}</div><div class="offer-body"><small>${esc(o.state)}</small><h4>${esc(o.name)}</h4><p style="font-size:11px;color:var(--muted)">${esc(o.product)}</p><div><span class="old">${money(o.old)}</span><span class="new">${money(o.new)}</span></div><div class="card-actions"><button class="add-btn" onclick="addToCartByName('${esc(o.product)}',${o.new})">Agregar</button><button class="view-btn" onclick="filterByName('${esc(o.product)}')">Ver producto</button></div></div></article>` }
+    function fillFilters() { const catOpts = '<option value="">Todas las categorías</option>' + CATS.map(c => `<option>${esc(c.name)}</option>`).join(''); categoryFilter.innerHTML = catOpts; adminCatFilter.innerHTML = catOpts; pCategory.innerHTML = CATS.map(c => `<option>${esc(c.name)}</option>`).join(''); sCategory.innerHTML = CATS.map(c => `<option>${esc(c.name)}</option>`).join(''); supplierFilter.innerHTML = '<option value="">Todos los proveedores</option>' + suppliers.map(s => `<option>${esc(s.name)}</option>`).join(''); pSupplier.innerHTML = suppliers.map(s => `<option>${esc(s.name)}</option>`).join('') }
+    function filterByCategory(cat) { openModule('products'); categoryFilter.value = cat; productSearch.value = ''; renderProducts(); toast('Mostrando ' + cat) }
+    function filterByName(name) { openModule('products'); productSearch.value = name; renderProducts() }
+    function searchProducts() { openModule('products'); productSearch.value = globalSearch.value.trim(); renderProducts() }
+    function clearFilters() { productSearch.value = ''; categoryFilter.value = ''; supplierFilter.value = ''; renderProducts() }
+    function renderProducts() { let q = (document.getElementById('productSearch')?.value || '').toLowerCase(), cat = categoryFilter?.value || '', sup = supplierFilter?.value || ''; let list = products.filter(p => (!q || (p.name + ' ' + p.code + ' ' + p.category + ' ' + p.supplier).toLowerCase().includes(q)) && (!cat || p.category === cat) && (!sup || p.supplier === sup)); productGrid.innerHTML = list.length ? list.map(p => `<article class="product-card"><button class="fav" onclick="toggleFav(this)">♡</button><div class="product-image">${p.icon}</div><h4>${esc(p.name)}</h4><div class="meta">${esc(p.code)} · ${esc(p.category)}<br>Proveedor: ${esc(p.supplier)}<br>Stock: ${p.stock} ${esc(p.unit)}</div><div class="price-row"><strong>${money(p.sell)}</strong><button class="small-add" onclick="addToCart('${p.code}')">+</button></div></article>`).join('') : `<div class="panel" style="grid-column:1/-1"><div class="empty"><div class="emoji">🔎</div><h3>No se encontraron productos</h3><p>Prueba con otro nombre o selecciona otra categoría.</p></div></div>` }
+    function toggleFav(b) { b.textContent = b.textContent === '♡' ? '♥' : '♡'; toast(b.textContent === '♥' ? 'Agregado a favoritos' : 'Quitado de favoritos') }
+    function addToCart(code) { const p = products.find(x => x.code === code); if (!p) return; const x = cart.find(i => i.code === code); if (x) x.qty++; else cart.push({ code, qty: 1 }); save(); updateCartCount(); renderCart(); toast('Producto agregado al carrito') }
+    function addToCartByName(name, price) { const p = products.find(x => x.name === name); if (p) addToCart(p.code); else { cart.push({ code: 'OF-' + name, qty: 1, name, price, icon: '🏷️' }); save(); updateCartCount(); renderCart(); toast('Oferta agregada al carrito') } }
+    function updateCartCount() { cartCount.textContent = cart.reduce((a, x) => a + x.qty, 0) }
+    function getCartItems() { return cart.map(i => { const p = products.find(x => x.code === i.code); return p ? { ...p, qty: i.qty } : i }) }
+    function renderCart() { const items = getCartItems(); if (!items.length) { cartPanel.innerHTML = '<div class="panel"><div class="empty"><div class="emoji">🛒</div><h3>Tu carrito está vacío</h3><p>Agrega productos para comenzar tu compra.</p><button class="primary" style="margin-top:14px" onclick="openModule(\'products\')">Comprar productos</button></div></div>'; return } let subtotal = items.reduce((a, p) => a + p.sell * p.qty, 0), discount = 0, tax = subtotal * .18, total = subtotal + tax - discount; cartPanel.innerHTML = `<div class="panel"><div class="cart-list">${items.map(p => `<div class="cart-item"><div class="cart-img">${p.icon}</div><div><strong>${esc(p.name)}</strong><small style="display:block;color:var(--muted);font-size:11px">${esc(p.category)}</small></div><div class="unit">${money(p.sell)}</div><div class="qty"><button onclick="changeQty('${p.code}',-1)">−</button><input value="${p.qty}" readonly><button onclick="changeQty('${p.code}',1)">+</button></div><strong class="subtotal">${money(p.sell * p.qty)}</strong><button class="remove" onclick="removeCart('${p.code}')">×</button></div>`).join('')}</div><div class="summary"><div><span>Subtotal</span><strong>${money(subtotal)}</strong></div><div><span>IGV (18%)</span><strong>${money(tax)}</strong></div><div><span>Descuentos</span><strong>-${money(discount)}</strong></div><div class="total"><span>Total</span><strong>${money(total)}</strong></div><div class="form-actions"><button class="secondary" onclick="emptyCart()">Vaciar carrito</button><button class="primary" onclick="checkout()">Proceder al pago</button></div></div></div>` }
+    function changeQty(code, d) { const x = cart.find(i => i.code === code); if (!x) return; x.qty += d; if (x.qty < 1) cart = cart.filter(i => i.code !== code); save(); updateCartCount(); renderCart() }
+    function removeCart(code) { cart = cart.filter(i => i.code !== code); save(); updateCartCount(); renderCart(); toast('Producto eliminado') }
+    function emptyCart() { if (confirm('¿Vaciar todo el carrito?')) { cart = []; save(); updateCartCount(); renderCart(); toast('Carrito vacío') } }
+    function checkout() { if (!cart.length) return; const items = getCartItems(), total = items.reduce((a, p) => a + p.sell * p.qty, 0) * 1.18; const o = { id: 'PED-' + String(Date.now()).slice(-6), date: new Date().toISOString().slice(0, 10), items: items.map(p => ({ name: p.name, qty: p.qty })), total, payment: 'Pago en línea', status: 'Pendiente', address: 'Dirección registrada por el cliente' }; orders.unshift(o); cart = []; save(); updateCartCount(); renderOrders(); openModule('orders'); toast('Pedido registrado correctamente') }
+    function renderOrders() { const q = (orderSearch?.value || '').toLowerCase(), st = orderStatus?.value || ''; const list = orders.filter(o => (!q || (o.id + ' ' + o.date).toLowerCase().includes(q)) && (!st || o.status === st)); statTotalOrders.textContent = orders.length; statPending.textContent = orders.filter(o => o.status === 'Pendiente').length; statProcess.textContent = orders.filter(o => o.status === 'Enviado').length; statDelivered.textContent = orders.filter(o => o.status === 'Entregado').length; ordersList.innerHTML = list.length ? list.map(o => `<article class="order-card"><div class="order-top"><div><strong>${o.id}</strong><small style="display:block;color:var(--muted);margin-top:4px">${o.date}</small></div><span class="status ${o.status === 'Cancelado' ? 'cancel' : ''}">${o.status}</span></div><div style="margin-top:10px;font-size:12px">${o.items.map(i => `${i.qty} × ${esc(i.name)}`).join(', ')}</div><div class="order-info"><div><span>Total pagado</span><strong>${money(o.total)}</strong></div><div><span>Pago</span><strong>${esc(o.payment)}</strong></div><div><span>Dirección</span><strong>${esc(o.address)}</strong></div><div><span>Acciones</span><strong><button class="export" onclick="viewOrder('${o.id}')">Ver detalle</button> <button class="export" onclick="reorder('${o.id}')">Volver a pedir</button></strong></div></div></article>`).join('') : '<div class="panel"><div class="empty"><div class="emoji">📋</div><h3>No tienes pedidos registrados</h3><p>Cuando realices una compra, aparecerá aquí.</p><button class="primary" style="margin-top:14px" onclick="openModule(\'products\')">Comprar productos</button></div></div>' }
+    function viewOrder(id) { const o = orders.find(x => x.id === id); if (!o) return; printArea.innerHTML = `<h1>MarketGo</h1><h2>Comprobante ${o.id}</h2><p>Fecha: ${o.date}</p><hr><p>${o.items.map(i => `${i.qty} × ${esc(i.name)}`).join('<br>')}</p><h2>Total: ${money(o.total)}</h2>`; printArea.style.display = 'block'; window.print(); setTimeout(() => printArea.style.display = 'none', 500) }
+    function reorder(id) { const o = orders.find(x => x.id === id); if (!o) return; o.items.forEach(i => { const p = products.find(x => x.name === i.name); if (p) { const x = cart.find(c => c.code === p.code); if (x) x.qty += i.qty; else cart.push({ code: p.code, qty: i.qty }) } }); save(); updateCartCount(); openModule('cart'); toast('Productos agregados nuevamente al carrito') }
+    function renderSuppliers() { const q = (supplierSearch?.value || '').toLowerCase(); const list = suppliers.filter(s => (s.name + ' ' + s.ruc + ' ' + s.category).toLowerCase().includes(q)); supplierTable.innerHTML = list.map((s, i) => `<tr><td>${esc(s.ruc)}</td><td>${esc(s.name)}</td><td>${esc(s.phone)}</td><td>${esc(s.category)}</td><td>${products.filter(p => p.supplier === s.name).map(p => p.name).join(', ') || '—'}</td><td>${esc(s.rating)}</td><td>${esc(s.state)}</td><td><button class="export" onclick="editSupplier(${i})">Editar</button><button class="export danger" onclick="deleteSupplier(${i})">Eliminar</button></td></tr>`).join('') || '<tr><td colspan="8">No se encontraron proveedores.</td></tr>' }
+    function openSupplierModal() { editSupplierIndex.value = ''; supplierModalTitle.textContent = 'Nuevo proveedor';['sRuc', 'sName', 'sPhone', 'sEmail', 'sAddress', 'sContact', 'sDays'].forEach(id => document.getElementById(id).value = ''); sPayment.value = 'Contado'; sRating.value = 'Bueno'; sState.value = 'Activo'; supplierModal.classList.add('show') }
+    function editSupplier(i) { const s = suppliers[i]; editSupplierIndex.value = i; supplierModalTitle.textContent = 'Editar proveedor'; sRuc.value = s.ruc; sName.value = s.name; sPhone.value = s.phone; sEmail.value = s.email; sAddress.value = s.address; sContact.value = s.contact; sDays.value = s.days; sPayment.value = s.payment; sCategory.value = s.category; sRating.value = s.rating; sState.value = s.state; supplierModal.classList.add('show') }
+    function saveSupplier() { const s = { ruc: sRuc.value.trim(), name: sName.value.trim(), phone: sPhone.value.trim(), email: sEmail.value.trim(), address: sAddress.value.trim(), contact: sContact.value.trim(), days: Number(sDays.value || 0), payment: sPayment.value, category: sCategory.value, rating: sRating.value, state: sState.value }; if (!s.ruc || !s.name) { toast('Completa RUC y razón social'); return } const i = editSupplierIndex.value; if (i === '') suppliers.push(s); else suppliers[Number(i)] = s; save(); fillFilters(); renderSuppliers(); closeModal('supplierModal'); toast('Proveedor guardado') }
+    function deleteSupplier(i) { if (confirm('¿Eliminar este proveedor?')) { suppliers.splice(i, 1); save(); fillFilters(); renderSuppliers(); toast('Proveedor eliminado') } }
+    function renderReports() { reportProducts.textContent = products.length; reportSuppliers.textContent = suppliers.length; reportOffers.textContent = offers.length; reportTable.innerHTML = products.map(p => `<tr><td>${p.code}</td><td>${esc(p.name)}</td><td>${esc(p.category)}</td><td>${esc(p.supplier)}</td><td>${money(p.sell)}</td><td>${p.stock}</td><td>${p.estado}</td></tr>`).join('') }
+    function renderAdminProducts() { const q = (adminProductSearch?.value || '').toLowerCase(), cat = adminCatFilter?.value || '', sf = stockFilter?.value || ''; const list = products.filter(p => (!q || (p.name + ' ' + p.code + ' ' + p.supplier).toLowerCase().includes(q)) && (!cat || p.category === cat) && (!sf || (sf === 'low' && p.stock <= p.min) || (sf === 'out' && p.stock === 0))); adminProductTable.innerHTML = list.map(p => { const i = products.indexOf(p); return `<tr><td>${p.code}</td><td>${esc(p.name)}</td><td>${esc(p.category)}</td><td>${esc(p.supplier)}</td><td>${money(p.sell)}</td><td>${p.stock}</td><td>${p.stock === 0 ? 'Agotado' : p.stock <= p.min ? 'Stock bajo' : 'Disponible'}</td><td><button class="export" onclick="openProductModal(${i})">Editar</button><button class="export danger" onclick="deleteProduct(${i})">Eliminar</button></td></tr>` }).join('') }
+    function openProductModal(i = '') { editProductIndex.value = i; pCategory.innerHTML = CATS.map(c => `<option>${esc(c.name)}</option>`).join(''); pSupplier.innerHTML = suppliers.map(s => `<option>${esc(s.name)}</option>`).join(''); if (i === '') { productModalTitle.textContent = 'Nuevo producto'; pCode.value = 'P' + String(products.length + 1).padStart(3, '0'); pName.value = ''; pDesc.value = ''; pBuy.value = ''; pSell.value = ''; pStock.value = 0; pMin.value = 10 } else { const p = products[i]; productModalTitle.textContent = 'Editar producto'; pCode.value = p.code; pName.value = p.name; pDesc.value = p.description; pCategory.value = p.category; pSupplier.value = p.supplier; pUnit.value = p.unit; pBuy.value = p.buy; pSell.value = p.sell; pStock.value = p.stock; pMin.value = p.min } productModal.classList.add('show') }
+    function saveProduct() { const p = { code: pCode.value.trim(), name: pName.value.trim(), description: pDesc.value.trim(), category: pCategory.value, supplier: pSupplier.value, supplierRuc: (suppliers.find(s => s.name === pSupplier.value) || {}).ruc || '', icon: '📦', unit: pUnit.value, buy: Number(pBuy.value || 0), sell: Number(pSell.value || 0), stock: Number(pStock.value || 0), min: Number(pMin.value || 0), estado: 'Disponible' }; if (!p.code || !p.name) { toast('Completa código y nombre'); return } const i = editProductIndex.value; if (i === '') { products.push(p) } else products[Number(i)] = p; renderProducts(); renderAdminProducts(); renderReports(); closeModal('productModal'); toast('Producto guardado') }
+    function deleteProduct(i) { if (confirm('¿Eliminar este producto?')) { products.splice(i, 1); renderProducts(); renderAdminProducts(); renderReports(); toast('Producto eliminado') } }
+    function closeModal(id) { document.getElementById(id).classList.remove('show') }
+    function exportCSV(filename, rows) { const csv = rows.map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\n'); const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click(); URL.revokeObjectURL(a.href); toast('Archivo Excel generado') }
+    function exportCategories() { exportCSV('marketgo_categorias.csv', [['Código', 'Categoría', 'Descripción'], ...CATS.map(c => [c.id, c.name, c.desc])]) }
+    function exportSuppliers() { exportCSV('marketgo_proveedores.csv', [['RUC', 'Razón social', 'Teléfono', 'Correo', 'Dirección', 'Categoría', 'Puntualidad', 'Estado'], ...suppliers.map(s => [s.ruc, s.name, s.phone, s.email, s.address, s.category, s.rating, s.state])]) }
+    function exportProducts() { exportCSV('marketgo_productos.csv', [['Código', 'Producto', 'Categoría', 'Proveedor', 'Precio venta', 'Stock', 'Estado'], ...products.map(p => [p.code, p.name, p.category, p.supplier, p.sell, p.stock, p.estado])]) }
+    function exportReport() { exportProducts() }
+    function printReport() { printArea.innerHTML = `<h1>MarketGo</h1><h2>Reporte de productos</h2><p>Fecha: ${new Date().toLocaleString('es-PE')}</p><table style="width:100%;border-collapse:collapse;margin-top:15px"><tr><th style="border:1px solid #ccc;padding:6px">Código</th><th style="border:1px solid #ccc;padding:6px">Producto</th><th style="border:1px solid #ccc;padding:6px">Categoría</th><th style="border:1px solid #ccc;padding:6px">Proveedor</th><th style="border:1px solid #ccc;padding:6px">Stock</th></tr>${products.map(p => `<tr><td style="border:1px solid #ccc;padding:6px">${p.code}</td><td style="border:1px solid #ccc;padding:6px">${esc(p.name)}</td><td style="border:1px solid #ccc;padding:6px">${esc(p.category)}</td><td style="border:1px solid #ccc;padding:6px">${esc(p.supplier)}</td><td style="border:1px solid #ccc;padding:6px">${p.stock}</td></tr>`).join('')}</table>`; printArea.style.display = 'block'; window.print(); setTimeout(() => printArea.style.display = 'none', 500) }
+    window.addEventListener('DOMContentLoaded', () => { if (current) boot(); else showAuth('login') });
+
+  </script>
+  </body>
+
+</html>

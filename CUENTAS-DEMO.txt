@@ -1,0 +1,16 @@
+CUENTAS DE DEMOSTRACIÓN MARKETGO
+
+Administrador
+Correo: admin@marketgo.pe
+Contraseña: 1234
+
+Empleado
+Correo: empleado@marketgo.pe
+Contraseña: 1234
+
+Cliente
+Correo: ana@marketgo.pe
+Contraseña: 1234
+
+Las cuentas se crean o reparan automáticamente al abrir index.html.
+Proyecto de demostración local: no son cuentas de un servidor externo.
