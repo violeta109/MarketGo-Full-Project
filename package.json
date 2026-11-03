@@ -1,0 +1,15 @@
+{
+  "name": "marketgo-full-project",
+  "version": "1.0.0",
+  "description": "## Estructura - `index.html`: estructura de la aplicación. - `css/styles.css`: todos los estilos extraídos del HTML original. - `js/app.js`: JavaScript extraído del HTML original. - `assets/icons/marketgo-logo.svg`: recurso local de marca de ejemplo. - `assets/products/README.md`: indica cómo incorporar fotografías reales de productos. - `RESPALDO/index-original.html`: copia íntegra del HTML original previo a la separación de archivos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
